@@ -1,22 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CharacterController : MonoBehaviour
 {
 
+    public Transform broom;
+    public Collider2D spongeCollider;
+    public Collider2D broomCollider;
+    public Transform sponge;
     public bool character0;
     public List<Animator> animators;
     public List<GameObject> characterDir;
-    public Rigidbody2D rigidbody2D;
+    public Rigidbody2D rb2d;
     int currentDir;
     private bool smoking;
 
-    public enum InventoryItem { Sponge, Broom };
     public enum LookPosition { UP, LEFT, DOWN, RIGHT};
     public enum AnimationState { IDLE, RUN, SMOKE };
+    public enum Equipment { NONE, BROOM, SPONGE };
 
     public AnimationState animationState;
+    public Equipment equipment;
 
     private void Start()
     {
@@ -24,6 +30,7 @@ public class CharacterController : MonoBehaviour
         UIManager.EnrollJoystickStop(JoystickStop);
         UIManager.EnrollAction(ClickAction);
         animationState = AnimationState.IDLE;
+        equipment = Equipment.NONE;
         currentDir = 3;
     }
 
@@ -46,13 +53,8 @@ public class CharacterController : MonoBehaviour
             Turn(LookPosition.DOWN);
         }
         RunAnimation();
-        dir *= 50;
-        Vector3 tmp = transform.position;
-        tmp.x += dir.x;
-        tmp.y += dir.y;
-        // transform.position = tmp;
-        rigidbody2D.AddForce(dir);
-        rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -10, 10), Mathf.Clamp(rigidbody2D.velocity.y, -10, 10));
+        rb2d.AddForce(dir * 50);
+        rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -10, 10), Mathf.Clamp(rb2d.velocity.y, -10, 10));
     }
 
     public void JoystickStop()
@@ -181,6 +183,45 @@ public class CharacterController : MonoBehaviour
         {
             animators[currentDir].SetTrigger("Smoke1");
             animationState = AnimationState.SMOKE;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Broom"))
+        {
+            broom.DOMove(transform.position, 0.2f).onComplete = () => broom.gameObject.SetActive(false);
+            broomCollider.enabled = false;
+            if(equipment == Equipment.SPONGE)
+            {
+                sponge.gameObject.SetActive(true);
+                Vector2 first = transform.position;
+                Vector2 second = transform.position;
+                sponge.position = first;
+                first.y += 0.3f;
+                second.y -= 1.4f;
+                sponge.DOMove(first, 0.5f).onComplete = () => sponge.DOMove(second, .5f).SetEase(Ease.OutBounce).onComplete = () => spongeCollider.enabled = true;
+
+            }
+            // TODO : Equipment changed to broom
+            equipment = Equipment.BROOM;
+        }
+        else if(collision.CompareTag("Sponge"))
+        {
+            sponge.DOMove(transform.position, 0.2f).onComplete = () => sponge.gameObject.SetActive(false);
+            spongeCollider.enabled = false;
+            if (equipment == Equipment.BROOM)
+            {
+                broom.gameObject.SetActive(true);
+                Vector2 first = transform.position;
+                Vector2 second = transform.position;
+                broom.position = first;
+                first.y += 0.3f;
+                second.y -= 1.4f;
+                broom.DOMove(first, 0.5f).onComplete = () => broom.DOMove(second, .5f).SetEase(Ease.OutBounce).onComplete = ()=> broomCollider.enabled = true;
+            }
+            // TODO : Equipment changed to sponge
+            equipment = Equipment.SPONGE;
         }
     }
 }
