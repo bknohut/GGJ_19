@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 624210475296116954}
   - component: {fileID: 624210475296116955}
   - component: {fileID: 6383194797970591225}
+  - component: {fileID: 2219397744162653622}
   m_Layer: 0
   m_Name: Character0
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 624210475296116953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8554106190723948073}
   - {fileID: 624210475303766015}
@@ -84,7 +85,18 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!210 &2219397744162653622
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624210475296116953}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &2924026527689237076
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +325,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 308342322, guid: 8e74d91c4866b0d49b078dc8e56e2825, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cd39543f44e0199488780cf2dce2e8b5, type: 2}
     - target: {fileID: 308342324, guid: 8e74d91c4866b0d49b078dc8e56e2825, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -475,11 +491,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Character0Up
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659233814710159868, guid: 80cbe90c19d45934a9dc38bb18248f50,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4650639320232403392, guid: 80cbe90c19d45934a9dc38bb18248f50,
         type: 3}
