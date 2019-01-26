@@ -18,8 +18,8 @@ public class InputManager : MonoBehaviour
     public delegate void JoystickAction(Vector2 direction);
     public delegate void ClickAction();
 
-    private List<JoystickAction> joystickActions;
-    private List<ClickAction> clickActions;
+    private JoystickAction joystickAction;
+    private ClickAction clickAction;
 
     void Start()
     {
@@ -72,29 +72,23 @@ public class InputManager : MonoBehaviour
             dir.y = Mathf.Clamp(dir.y, 25, 125);
             currentPos = startPos + dir;
             front.position = currentPos;
-            foreach(JoystickAction joystickAction in joystickActions)
-                joystickAction(dir / 50 - new Vector2(1.5f, 1.5f));
+            joystickAction(dir / 50 - new Vector2(1.5f, 1.5f));
             stick.right = -front.localPosition;
         }
     }
 
     public void ActionClicked()
     {
-        foreach(ClickAction clickAction in clickActions)
         clickAction();
     }
 
     public void EnrollJoystick(JoystickAction joystickAction)
     {
-        if (joystickActions == null)
-            joystickActions = new List<JoystickAction>();
-        joystickActions.Add(joystickAction);
+        this.joystickAction = joystickAction;
     }
 
     public void EnrollAction(ClickAction clickAction)
     {
-        if (clickActions == null)
-            clickActions = new List<ClickAction>();
-        clickActions.Add(clickAction);
+        this.clickAction = clickAction;
     }
 }

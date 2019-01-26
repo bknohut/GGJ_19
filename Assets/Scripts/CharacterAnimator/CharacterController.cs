@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimator : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
 
     public bool character0;
@@ -17,8 +17,35 @@ public class CharacterAnimator : MonoBehaviour
 
     private void Start()
     {
+        UIManager.EnrollJoystick(Movement);
         animationState = AnimationState.IDLE;
         currentDir = 3;
+    }
+
+    public void Movement(Vector2 dir)
+    {
+        if( dir.x >= 0f && dir.y >= 0f)
+        {
+            Turn(LookPosition.UP);
+        }
+        else if (dir.x >= 0f && dir.y < 0f)
+        {
+            Turn(LookPosition.RIGHT);
+        }
+        else if (dir.x < 0f && dir.y >= 0f)
+        {
+            Turn(LookPosition.LEFT);
+        }
+        else
+        {
+            Turn(LookPosition.DOWN);
+        }
+        RunAnimation();
+        dir *= 10;
+        Vector3 tmp = transform.position;
+        tmp.x += dir.x;
+        tmp.y += dir.y;
+        transform.position = tmp;
     }
 
     public void Turn(LookPosition lookPosition)
