@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public InputManager inputManager;
+    public HUD Hud;
 
     private void Awake()
     {
@@ -25,5 +26,9 @@ public class UIManager : MonoBehaviour
     public static void EnrollAction(InputManager.ClickAction clickAction)
     {
         instance.inputManager.EnrollAction(clickAction);
+    }
+    public static void SetItemImage(bool a)
+    {
+        instance.Hud.SetInventoryImage(a);
     }
 }
