@@ -8,6 +8,7 @@ public class CharacterController : MonoBehaviour
     public bool character0;
     public List<Animator> animators;
     public List<GameObject> characterDir;
+    public Rigidbody2D rigidbody2D;
     int currentDir;
     private bool smoking;
 
@@ -27,7 +28,7 @@ public class CharacterController : MonoBehaviour
 
     public void JoystickMove(Vector2 dir)
     {
-        if( dir.x >= 0f && dir.y >= 0f)
+        if (dir.x >= 0f && dir.y >= 0f)
         {
             Turn(LookPosition.UP);
         }
@@ -44,11 +45,13 @@ public class CharacterController : MonoBehaviour
             Turn(LookPosition.DOWN);
         }
         RunAnimation();
-        dir *= 10;
+        dir *= 50;
         Vector3 tmp = transform.position;
         tmp.x += dir.x;
         tmp.y += dir.y;
-        transform.position = tmp;
+        // transform.position = tmp;
+        rigidbody2D.AddForce(dir);
+        rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -10, 10), Mathf.Clamp(rigidbody2D.velocity.y, -10, 10));
     }
 
     public void JoystickStop()
