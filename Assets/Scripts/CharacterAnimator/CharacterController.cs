@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class CharacterController : MonoBehaviour
 {
-
     public Transform broom;
     public Collider2D spongeCollider;
     public Collider2D broomCollider;
@@ -17,6 +16,7 @@ public class CharacterController : MonoBehaviour
     int currentDir;
     private bool smoking;
 
+    private Ground ground;  
     public enum LookPosition { UP, LEFT, DOWN, RIGHT};
     public enum AnimationState { IDLE, RUN, SMOKE };
     public enum Equipment { NONE, BROOM, SPONGE };
@@ -64,11 +64,16 @@ public class CharacterController : MonoBehaviour
 
     public void ClickAction()
     {
-        if (!smoking)
+        if (!smoking && ground != null)
         {
-            smoking = true;
-            SmokeAnimation();
-            StartCoroutine(SmokeWaitRoutine());
+            if ((ground.groundType == Ground.GroundType.DIRT && equipment == Equipment.BROOM) ||
+                (ground.groundType == Ground.GroundType.WET && equipment == Equipment.SPONGE))
+            {
+                smoking = true;
+                SmokeAnimation();
+                StartCoroutine(SmokeWaitRoutine());
+                ground.Clean();
+            }
         }
     }
 
@@ -222,6 +227,26 @@ public class CharacterController : MonoBehaviour
             }
             // TODO : Equipment changed to sponge
             equipment = Equipment.SPONGE;
+        }
+        else if(collision.CompareTag("Wet"))
+        {
+            ground = collision.GetComponent<Ground>();
+        }
+        else if(collision.CompareTag("Dirt"))
+        {
+            ground = collision.GetComponent<Ground>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wet"))
+        {
+            ground = null;
+        }
+        else if (collision.CompareTag("Dirt"))
+        {
+            ground = null;
         }
     }
 }

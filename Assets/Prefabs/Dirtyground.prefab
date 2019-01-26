@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9164360167126620011}
   - component: {fileID: 8906444081432915703}
   - component: {fileID: 579718970418362496}
+  - component: {fileID: 6977494319483518467}
   m_Layer: 14
   m_Name: Dirtyground
   m_TagString: Dirt
@@ -68,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 76b1bdd7c257cd442a430ea217ade563, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,3 +111,18 @@ PolygonCollider2D:
       - {x: -0.046710968, y: 0.7489052}
       - {x: -0.9072933, y: 0.21989155}
       - {x: -0.8845997, y: -0.36163044}
+--- !u!114 &6977494319483518467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825148957437296318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0f23259e206a245b158ad2756ffcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundType: 1
+  col: {fileID: 579718970418362496}
+  spriteRenderer: {fileID: 8906444081432915703}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1350244554273318701}
   - component: {fileID: 8209894950697050911}
   - component: {fileID: 6463614454429065553}
+  - component: {fileID: 5202389593819825404}
   m_Layer: 13
   m_Name: Wet_ground
   m_TagString: Wet
@@ -90,7 +91,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -146,3 +147,18 @@ PolygonCollider2D:
       - {x: 0.13499999, y: -0.945}
       - {x: 0.24499999, y: -0.91499996}
       - {x: 0.415, y: -0.79499996}
+--- !u!114 &5202389593819825404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5517647369343526178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0f23259e206a245b158ad2756ffcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundType: 0
+  col: {fileID: 6463614454429065553}
+  spriteRenderer: {fileID: 8209894950697050911}

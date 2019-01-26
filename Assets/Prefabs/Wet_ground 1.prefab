@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2411638354969987228}
   - component: {fileID: 5874070722299781525}
   - component: {fileID: 979973494803463003}
+  - component: {fileID: 6038825914310979864}
   m_Layer: 13
   m_Name: Wet_ground 1
   m_TagString: Wet
@@ -68,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 979a377181b990341b94ab98dfdb5af4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -149,3 +150,18 @@ PolygonCollider2D:
       - {x: 0.83, y: -0.945}
       - {x: 1.02, y: -0.875}
       - {x: 1.25, y: -0.765}
+--- !u!114 &6038825914310979864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743085632506598875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0f23259e206a245b158ad2756ffcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundType: 0
+  col: {fileID: 979973494803463003}
+  spriteRenderer: {fileID: 5874070722299781525}
