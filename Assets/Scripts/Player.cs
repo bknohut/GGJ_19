@@ -9,6 +9,7 @@ public class Player : NetworkBehaviour
     private bool _isConnectionSet;
     private short movementmsg = 101;
     NetworkClient client;
+    public CharacterAnimator anim;
 
     public class CustomMessage : MessageBase
     {
@@ -22,6 +23,7 @@ public class Player : NetworkBehaviour
     private void Start()
     {
         UIManager.EnrollJoystick(GetMovementDirection);
+        //anim = transform.GetComponent<CharacterAnimator>();
     }
 
     void GetMovementDirection(Vector2 dir)
@@ -50,15 +52,34 @@ public class Player : NetworkBehaviour
     }
     void Movement(Vector2 dir, GameObject obj = null)
     {
-        dir *= 10f;
-        if( obj == null )
+        if ( obj == null )
         {
             obj = GameManager.Instance.Players[1];
+            anim = obj.GetComponent<CharacterAnimator>();
         }
+        if(dir.x < 0 && dir.y < 0)
+        {
+            anim.Turn(CharacterAnimator.LookPosition.DOWN);
+        }
+        else if(dir.x < 0 && dir.y >= 0)
+        {
+            anim.Turn(CharacterAnimator.LookPosition.LEFT);
+        }
+        else if(dir.x >= 0 && dir.y < 0)
+        {
+            anim.Turn(CharacterAnimator.LookPosition.RIGHT);
+        }
+        else
+        {
+            anim.Turn(CharacterAnimator.LookPosition.UP);
+        }
+        dir *= 10f;
+        //anim.RunAnimation();
         Vector3 tmp = obj.transform.position;
         tmp.x += dir.x;
         tmp.y += dir.y;
         obj.transform.position = tmp;
+
     }
     void SendMovementCall(CustomMessage msg)
     {   

@@ -10,78 +10,88 @@ public class CharacterAnimator : MonoBehaviour
     public List<GameObject> characterDir;
     int currentDir;
 
-    public bool left;
-    public bool up;
-    public bool down;
-    public bool right;
     public enum LookPosition { UP, LEFT, DOWN, RIGHT};
+    public enum AnimationState { IDLE, RUN, SMOKE };
+
+    public AnimationState animationState;
 
     private void Start()
     {
+        animationState = AnimationState.IDLE;
         currentDir = 3;
-    }
-
-    private void Update()
-    {
-        if (left)
-        {
-            Turn(LookPosition.LEFT);
-            left = false;
-        }
-
-        if (up)
-        {
-            Turn(LookPosition.UP);
-                up = false;
-        }
-        if (down)
-        {
-            Turn(LookPosition.DOWN);
-                down = false;
-        }
-        if (right)
-        {
-            Turn(LookPosition.RIGHT);
-                right = false;
-        }
     }
 
     public void Turn(LookPosition lookPosition)
     {
-        animators[currentDir].SetTrigger("Idle");
+        RunAnimation();
         switch (lookPosition)
         {
             case LookPosition.UP:
                 characterDir[currentDir].SetActive(false);
                 currentDir = 0;
                 characterDir[currentDir].SetActive(true);
+                ChangeAnimation();
                 break;
             case LookPosition.LEFT:
                 characterDir[currentDir].SetActive(false);
                 currentDir = 1;
                 characterDir[currentDir].SetActive(true);
+                ChangeAnimation();
                 break;
             case LookPosition.DOWN:
                 characterDir[currentDir].SetActive(false);
                 currentDir = 2;
                 characterDir[currentDir].SetActive(true);
+                ChangeAnimation();
                 break;
             case LookPosition.RIGHT:
                 characterDir[currentDir].SetActive(false);
                 currentDir = 3;
                 characterDir[currentDir].SetActive(true);
+                ChangeAnimation();
+                break;
+        }
+    }
+
+    public void ChangeAnimation()
+    {
+        Debug.Log(animators[currentDir].gameObject);
+        switch(animationState)
+        {
+            case AnimationState.IDLE:
+                if(!animators[currentDir].GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+                    animators[currentDir].SetTrigger("Idle");
+                break;
+            case AnimationState.SMOKE:
+                if (character0 && !animators[currentDir].GetCurrentAnimatorStateInfo(0).IsName("Smoke0"))
+                        animators[currentDir].SetTrigger("Smoke0");
+                else if (!character0 && !animators[currentDir].GetCurrentAnimatorStateInfo(0).IsName("Smoke1"))
+                        animators[currentDir].SetTrigger("Smoke1");
+                break;
+            case AnimationState.RUN:
+                if (!animators[currentDir].GetCurrentAnimatorStateInfo(0).IsName("Run"))
+                    animators[currentDir].SetTrigger("Run");
                 break;
         }
     }
 
     public void RunAnimation()
     {
-        animators[currentDir].SetTrigger("Run");
+
+        if (animationState != AnimationState.RUN)
+        {
+            animators[currentDir].SetTrigger("Run");
+            animationState = AnimationState.RUN;
+        }
     }
 
     public void IdleAnimation()
     {
-        animators[currentDir].SetTrigger("Idle");
+        if (animationState != AnimationState.IDLE)
+        {
+            animators[currentDir].SetTrigger("Idle");
+            animationState = AnimationState.IDLE;
+        }
     }
 
     public void SmokeAnimation()
@@ -94,11 +104,19 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Smoke0Animation()
     {
-        animators[currentDir].SetTrigger("Smoke0");
+        if (animationState != AnimationState.SMOKE)
+        {
+            animators[currentDir].SetTrigger("Smoke0");
+            animationState = AnimationState.SMOKE;
+        }
     }
 
     public void Smoke1Animation()
     {
-        animators[currentDir].SetTrigger("Smoke1");
+        if (animationState != AnimationState.SMOKE)
+        {
+            animators[currentDir].SetTrigger("Smoke1");
+            animationState = AnimationState.SMOKE;
+        }
     }
 }
