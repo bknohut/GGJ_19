@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour
     int currentDir;
     private bool smoking;
 
+    public enum InventoryItem { Sponge, Broom };
     public enum LookPosition { UP, LEFT, DOWN, RIGHT};
     public enum AnimationState { IDLE, RUN, SMOKE };
 
