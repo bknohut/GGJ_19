@@ -18,8 +18,8 @@ public class InputManager : MonoBehaviour
     public delegate void JoystickAction(Vector2 direction);
     public delegate void ClickAction();
 
-    private JoystickAction joystickAction;
-    private ClickAction clickAction;
+    private List<JoystickAction> joystickActions;
+    private List<ClickAction> clickActions;
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
         startPos = back.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(!moving && Input.GetMouseButtonDown(0) && Input.mousePosition.x < Screen.width / 3 && Input.mousePosition.y < Screen.height / 3)
         {
@@ -72,23 +72,29 @@ public class InputManager : MonoBehaviour
             dir.y = Mathf.Clamp(dir.y, 25, 125);
             currentPos = startPos + dir;
             front.position = currentPos;
-            Debug.Log(dir/50 - new Vector2(1.5f,1.5f));
+            foreach(JoystickAction joystickAction in joystickActions)
+                joystickAction(dir / 50 - new Vector2(1.5f, 1.5f));
             stick.right = -front.localPosition;
         }
     }
 
     public void ActionClicked()
     {
+        foreach(ClickAction clickAction in clickActions)
         clickAction();
     }
 
     public void EnrollJoystick(JoystickAction joystickAction)
     {
-        this.joystickAction = joystickAction;
+        if (joystickActions == null)
+            joystickActions = new List<JoystickAction>();
+        joystickActions.Add(joystickAction);
     }
 
     public void EnrollAction(ClickAction clickAction)
     {
-        this.clickAction = clickAction;
+        if (clickActions == null)
+            clickActions = new List<ClickAction>();
+        clickActions.Add(clickAction);
     }
 }

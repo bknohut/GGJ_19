@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if( Instance == null )
+        //Application.runInBackground = true;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        if ( Instance == null )
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
