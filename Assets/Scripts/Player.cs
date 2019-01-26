@@ -26,7 +26,6 @@ public class Player : NetworkBehaviour
 
     void GetMovementDirection(Vector2 dir)
     {
-        Debug.Log(dir);
         if (isServer)
         {
             if (!_isPlayerOne)
@@ -51,7 +50,7 @@ public class Player : NetworkBehaviour
     }
     void Movement(Vector2 dir, GameObject obj = null)
     {
-        dir /= 10f;
+        dir *= 10f;
         if( obj == null )
         {
             obj = GameManager.Instance.Players[1];
