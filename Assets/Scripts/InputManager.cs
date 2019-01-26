@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
 
     public RectTransform back;
     public RectTransform front;
+    public RectTransform stick;
 
     public delegate void JoystickAction(Vector2 direction);
     public delegate void ClickAction();
@@ -28,6 +29,20 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
+        if(!moving && Input.GetMouseButtonDown(0) && Input.mousePosition.x < Screen.width / 3 && Input.mousePosition.y < Screen.height / 3)
+        {
+            moving = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            moving = false;
+            front.localPosition = new Vector2(75, 75);
+        }
+        else
+            currentPos = Input.mousePosition;
+        if (Input.GetKeyDown(KeyCode.Space))
+            ActionClicked();
+
         foreach (Touch touch in Input.touches)
         {
             if (!moving && touch.phase == TouchPhase.Began && touch.position.x < Screen.width / 3 && touch.position.y < Screen.height / 3)
@@ -53,11 +68,12 @@ public class InputManager : MonoBehaviour
         if (moving)
         {
             Vector2 dir = (currentPos - startPos);
-            dir.x = Mathf.Clamp(dir.x, 0, 175);
-            dir.y = Mathf.Clamp(dir.y, 0, 175);
+            dir.x = Mathf.Clamp(dir.x, 25, 125);
+            dir.y = Mathf.Clamp(dir.y, 25, 125);
             currentPos = startPos + dir;
             front.position = currentPos;
-            joystickAction(dir / 87.5f - Vector2.one);
+            Debug.Log(dir/50 - new Vector2(1.5f,1.5f));
+            stick.right = -front.localPosition;
         }
     }
 
@@ -65,7 +81,6 @@ public class InputManager : MonoBehaviour
     {
         clickAction();
     }
-
 
     public void EnrollJoystick(JoystickAction joystickAction)
     {
