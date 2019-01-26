@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2287967295484121632}
   - component: {fileID: 1612222775226579300}
+  - component: {fileID: 874772915182862166}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -79,3 +80,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &874772915182862166
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640357145116117583}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.01, y: 2.48}
+    newSize: {x: 1.01, y: 2.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.66490746, y: -0.8135957}
+      - {x: -0.24942541, y: -1.338081}
+      - {x: 0.66167164, y: -1.1134979}
+      - {x: 0.2894435, y: -0.4939633}
