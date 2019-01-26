@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     public List<Animator> animators;
     public List<GameObject> characterDir;
     int currentDir;
+    private bool smoking;
 
     public enum LookPosition { UP, LEFT, DOWN, RIGHT};
     public enum AnimationState { IDLE, RUN, SMOKE };
@@ -17,12 +18,14 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        UIManager.EnrollJoystick(Movement);
+        UIManager.EnrollJoystickMove(JoystickMove);
+        UIManager.EnrollJoystickStop(JoystickStop);
+        UIManager.EnrollAction(ClickAction);
         animationState = AnimationState.IDLE;
         currentDir = 3;
     }
 
-    public void Movement(Vector2 dir)
+    public void JoystickMove(Vector2 dir)
     {
         if( dir.x >= 0f && dir.y >= 0f)
         {
@@ -48,30 +51,61 @@ public class CharacterController : MonoBehaviour
         transform.position = tmp;
     }
 
+    public void JoystickStop()
+    {
+        IdleAnimation();
+    }
+
+    public void ClickAction()
+    {
+        if (!smoking)
+        {
+            smoking = true;
+            SmokeAnimation();
+            StartCoroutine(SmokeWaitRoutine());
+        }
+    }
+
+    private IEnumerator SmokeWaitRoutine()
+    {
+        yield return new WaitForSeconds(1);
+        animationState = AnimationState.IDLE;
+        yield return new WaitForSeconds(0f);
+        smoking = false;
+    }
+
     public void Turn(LookPosition lookPosition)
     {
         RunAnimation();
         switch (lookPosition)
         {
             case LookPosition.UP:
+                if (currentDir == 0)
+                    return;
                 characterDir[currentDir].SetActive(false);
                 currentDir = 0;
                 characterDir[currentDir].SetActive(true);
                 ChangeAnimation();
                 break;
             case LookPosition.LEFT:
+                if (currentDir == 1)
+                    return;
                 characterDir[currentDir].SetActive(false);
                 currentDir = 1;
                 characterDir[currentDir].SetActive(true);
                 ChangeAnimation();
                 break;
             case LookPosition.DOWN:
+                if (currentDir == 2)
+                    return;
                 characterDir[currentDir].SetActive(false);
                 currentDir = 2;
                 characterDir[currentDir].SetActive(true);
                 ChangeAnimation();
                 break;
             case LookPosition.RIGHT:
+                if (currentDir == 3)
+                    return;
                 characterDir[currentDir].SetActive(false);
                 currentDir = 3;
                 characterDir[currentDir].SetActive(true);
@@ -82,7 +116,6 @@ public class CharacterController : MonoBehaviour
 
     public void ChangeAnimation()
     {
-        Debug.Log(animators[currentDir].gameObject);
         switch(animationState)
         {
             case AnimationState.IDLE:

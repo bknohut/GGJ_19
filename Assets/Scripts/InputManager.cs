@@ -15,11 +15,13 @@ public class InputManager : MonoBehaviour
     public RectTransform front;
     public RectTransform stick;
 
-    public delegate void JoystickAction(Vector2 direction);
+    public delegate void JoystickMoveAction(Vector2 direction);
     public delegate void ClickAction();
+    public delegate void JoystickStopAction();
 
-    private JoystickAction joystickAction;
+    private JoystickMoveAction joystickMoveAction;
     private ClickAction clickAction;
+    private JoystickStopAction joystickStopAction;
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class InputManager : MonoBehaviour
         {
             moving = false;
             front.localPosition = new Vector2(75, 75);
+            joystickStopAction();
         }
         else
             currentPos = Input.mousePosition;
@@ -57,6 +60,7 @@ public class InputManager : MonoBehaviour
                     moving = false;
                     joystickId = -1;
                     front.localPosition = new Vector2(75, 75);
+                    joystickStopAction();
                 }
                 else
                     currentPos = touch.position;
@@ -72,7 +76,7 @@ public class InputManager : MonoBehaviour
             dir.y = Mathf.Clamp(dir.y, 25, 125);
             currentPos = startPos + dir;
             front.position = currentPos;
-            joystickAction(dir / 50 - new Vector2(1.5f, 1.5f));
+            joystickMoveAction(dir / 50 - new Vector2(1.5f, 1.5f));
             stick.right = -front.localPosition;
         }
     }
@@ -82,9 +86,14 @@ public class InputManager : MonoBehaviour
         clickAction();
     }
 
-    public void EnrollJoystick(JoystickAction joystickAction)
+    public void EnrollJoystickMove(JoystickMoveAction joystickMoveAction)
     {
-        this.joystickAction = joystickAction;
+        this.joystickMoveAction = joystickMoveAction;
+    }
+
+    public void EnrollJoystickStop(JoystickStopAction joystickStopAction)
+    {
+        this.joystickStopAction = joystickStopAction;
     }
 
     public void EnrollAction(ClickAction clickAction)

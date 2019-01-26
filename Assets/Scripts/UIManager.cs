@@ -12,9 +12,14 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
 
-    public static void EnrollJoystick(InputManager.JoystickAction joystickAction)
+    public static void EnrollJoystickMove(InputManager.JoystickMoveAction joystickMoveAction)
     {
-        instance.inputManager.EnrollJoystick(joystickAction);
+        instance.inputManager.EnrollJoystickMove(joystickMoveAction);
+    }
+
+    public static void EnrollJoystickStop(InputManager.JoystickStopAction joystickStopAction)
+    {
+        instance.inputManager.EnrollJoystickStop(joystickStopAction);
     }
 
     public static void EnrollAction(InputManager.ClickAction clickAction)
