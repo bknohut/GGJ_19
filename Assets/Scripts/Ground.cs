@@ -21,4 +21,8 @@ public class Ground : MonoBehaviour
     {
         spriteRenderer.DOFade(1, 1).onComplete = () => col.enabled = true;
     }
+    public void OnRetry()
+    {
+        Reappear();
+    }
 }

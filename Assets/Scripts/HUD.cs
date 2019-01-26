@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
+    [SerializeField] GameObject _pauseButton;
     [SerializeField] GameObject _inventory;
     [SerializeField] Image _inventoryIcon;
     [SerializeField] GameObject _progressBar;
     [SerializeField] Image _progressBarFill;
     [SerializeField] Sprite _broom;
     [SerializeField] Sprite _sponge;
+    [SerializeField] Sprite _emptyInventory;
 
     
     private void OnEnable()
@@ -24,21 +26,33 @@ public class HUD : MonoBehaviour
 
     private void OnGameStarted()
     {
+        _pauseButton.SetActive(true);
         _inventory.SetActive(true);
         _progressBar.SetActive(true);
-        _progressBarFill.fillAmount = 0f;
+        _progressBarFill.fillAmount = 1f;
         StartCoroutine(StartGameTimer(10));
     }
-    public void SetInventoryImage(bool a)
+    public void SetInventoryImage(CharacterController.Equipment equipment)
     {
-        if( a )
+        if(equipment == CharacterController.Equipment.BROOM)
         {
             _inventoryIcon.sprite = _broom;
         }
-        else
+        else if(equipment == CharacterController.Equipment.SPONGE)
         {
             _inventoryIcon.sprite  = _sponge;
         }
+        else
+        {
+            Debug.LogError("INVALID ITEM");
+        }
+    }
+    public void OnRetry()
+    {
+        _inventoryIcon.sprite = _emptyInventory;
+        _progressBarFill.fillAmount = 1f;
+        StopAllCoroutines();
+        StartCoroutine(StartGameTimer(10));
     }
     private IEnumerator StartGameTimer(int time)
     {
@@ -51,4 +65,5 @@ public class HUD : MonoBehaviour
             _progressBarFill.fillAmount = (time - passedTime )/ time;
         }
     }
+    
 }

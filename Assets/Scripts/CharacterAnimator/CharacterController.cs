@@ -208,7 +208,7 @@ public class CharacterController : MonoBehaviour
                 sponge.DOMove(first, 0.5f).onComplete = () => sponge.DOMove(second, .5f).SetEase(Ease.OutBounce).onComplete = () => spongeCollider.enabled = true;
 
             }
-            // TODO : Equipment changed to broom
+            UIManager.SetItemImage(Equipment.BROOM);
             equipment = Equipment.BROOM;
         }
         else if(collision.CompareTag("Sponge"))
@@ -225,7 +225,8 @@ public class CharacterController : MonoBehaviour
                 second.y -= 1.4f;
                 broom.DOMove(first, 0.5f).onComplete = () => broom.DOMove(second, .5f).SetEase(Ease.OutBounce).onComplete = ()=> broomCollider.enabled = true;
             }
-            // TODO : Equipment changed to sponge
+            UIManager.SetItemImage(Equipment.SPONGE);
+
             equipment = Equipment.SPONGE;
         }
         else if(collision.CompareTag("Wet"))

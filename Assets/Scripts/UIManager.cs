@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public InputManager inputManager;
+    public EntranceView entranceView;
+    public PauseMenu pauseMenu;
     public HUD Hud;
 
     private void Awake()
@@ -27,8 +29,19 @@ public class UIManager : MonoBehaviour
     {
         instance.inputManager.EnrollAction(clickAction);
     }
-    public static void SetItemImage(bool a)
+    public static void SetItemImage(CharacterController.Equipment equipment)
     {
-        instance.Hud.SetInventoryImage(a);
+        instance.Hud.SetInventoryImage(equipment);
+    }
+
+    public static void StartGame()
+    {
+        instance.entranceView.OnStartButtonClicked();
+    }
+
+    public void OnPauseButtonClicked()
+    {
+        Time.timeScale = 0;
+        pauseMenu.gameObject.SetActive(true);
     }
 }

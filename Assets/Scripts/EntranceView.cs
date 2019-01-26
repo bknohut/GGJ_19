@@ -12,11 +12,11 @@ public class EntranceView : MonoBehaviour
 
     public void OnEnable()
     {
-        _logo.DOLocalMoveY(360f, 1f).SetEase(Ease.InOutBounce);
+        _logo.DOLocalMoveY(360f, .75f).SetEase(Ease.OutBounce);
     }
     public void OnStartButtonClicked()
     {
-        _logo.DOLocalMoveY(800f, 1f).onComplete = () => 
+        _logo.DOLocalMoveY(800f, .5f).SetEase(Ease.InQuad).onComplete = () => 
                                 {
                                     GameStarted?.Invoke();
                                     gameObject.SetActive(false); };
