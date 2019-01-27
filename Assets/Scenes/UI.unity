@@ -1215,7 +1215,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -781, y: 445}
-  m_SizeDelta: {x: 316, y: 147}
+  m_SizeDelta: {x: 164, y: 164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128043972
 MonoBehaviour:
@@ -1290,7 +1290,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 89482293c3dda784d8862862f7fb9edc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c4c18f4e0de8fad4aae95c5354b6d171, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1967,6 +1967,7 @@ MonoBehaviour:
   _progressBarFill: {fileID: 1760926610}
   _broom: {fileID: 21300000, guid: 3709d7c0bb08deb46b674f8d197f61ea, type: 3}
   _sponge: {fileID: 21300000, guid: dd5b865e8b54acb4daf1389c3db92fa9, type: 3}
+  _emptyInventory: {fileID: 0}
 --- !u!1 &1760926608
 GameObject:
   m_ObjectHideFlags: 0
