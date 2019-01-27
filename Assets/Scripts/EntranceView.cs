@@ -18,6 +18,7 @@ public class EntranceView : MonoBehaviour
     }
     public void OnStartButtonClicked()
     {
+        EndGameView.ResetScore();
         _logo.DOLocalMoveY(800f, .5f).SetEase(Ease.InQuad);
         _motherEntrance.DOLocalMoveX(0, .5f).SetEase(Ease.OutQuad).onComplete = () =>
         {

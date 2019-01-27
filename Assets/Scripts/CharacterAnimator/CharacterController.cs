@@ -77,6 +77,7 @@ public class CharacterController : MonoBehaviour
                 SmokeAnimation();
                 StartCoroutine(SmokeWaitRoutine());
                 ground.Clean();
+                EndGameView.IncreaseScore();
             }
         }
     }

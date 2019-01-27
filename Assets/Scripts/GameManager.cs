@@ -39,5 +39,7 @@ public class GameManager : MonoBehaviour
         Broom.position = new Vector3(-5, -3, 0);
         CharacterController.transform.position = new Vector3(0, 0, 0);
         CharacterController.equipment = CharacterController.Equipment.NONE;
+        CharacterController.Turn(CharacterController.LookPosition.DOWN);
+        EndGameView.ResetScore();
     }
 }
