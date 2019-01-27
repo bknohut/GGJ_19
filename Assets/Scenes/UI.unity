@@ -1967,7 +1967,7 @@ MonoBehaviour:
   _progressBarFill: {fileID: 1760926610}
   _broom: {fileID: 21300000, guid: 3709d7c0bb08deb46b674f8d197f61ea, type: 3}
   _sponge: {fileID: 21300000, guid: dd5b865e8b54acb4daf1389c3db92fa9, type: 3}
-  _emptyInventory: {fileID: 0}
+  _emptyInventory: {fileID: 21300000, guid: 5e132d95e36939442ad08d8c06b6e93d, type: 3}
 --- !u!1 &1760926608
 GameObject:
   m_ObjectHideFlags: 0
