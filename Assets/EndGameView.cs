@@ -32,6 +32,7 @@ public class EndGameView : MonoBehaviour
         {
             return;
         }
+        Time.timeScale = 0;
         _instance._scoreText.text = $"{_score}/21";
         _instance._popup.SetActive(true);
     }
