@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2246982725030914216}
   - component: {fileID: 8279059866333092505}
+  - component: {fileID: 6710419255699209746}
   m_Layer: 0
   m_Name: bathroom-01
   m_TagString: Untagged
@@ -79,3 +80,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6710419255699209746
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404965776097787550}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.72, y: 2.02}
+    newSize: {x: 1.72, y: 2.02}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.00024414062, y: -1.1785846}
+      - {x: -0.55065536, y: -0.8728025}
+      - {x: -0.20633316, y: -0.5125197}
+      - {x: 0.31214905, y: -0.7494148}

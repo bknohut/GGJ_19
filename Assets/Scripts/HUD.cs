@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour
         _inventory.SetActive(true);
         _progressBar.SetActive(true);
         _progressBarFill.fillAmount = 1f;
-        StartCoroutine(StartGameTimer(10));
+        StartCoroutine(StartGameTimer(90));
     }
     public void SetInventoryImage(CharacterController.Equipment equipment)
     {
@@ -52,7 +52,7 @@ public class HUD : MonoBehaviour
         _inventoryIcon.sprite = _emptyInventory;
         _progressBarFill.fillAmount = 1f;
         StopAllCoroutines();
-        StartCoroutine(StartGameTimer(10));
+        StartCoroutine(StartGameTimer(90));
     }
     private IEnumerator StartGameTimer(int time)
     {
