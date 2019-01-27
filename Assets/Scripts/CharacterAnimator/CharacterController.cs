@@ -52,14 +52,18 @@ public class CharacterController : MonoBehaviour
         {
             Turn(LookPosition.DOWN);
         }
-        RunAnimation();
+        if(!smoking)
+            RunAnimation();
         rb2d.AddForce(dir * 50);
         rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -10, 10), Mathf.Clamp(rb2d.velocity.y, -10, 10));
     }
 
     public void JoystickStop()
     {
-        IdleAnimation();
+        if (!smoking)
+            IdleAnimation();
+        else
+            StartCoroutine(SmokeWaitRoutine());
     }
 
     public void ClickAction()

@@ -31,6 +31,7 @@ public class InputManager : MonoBehaviour
 
     void FixedUpdate()
     {
+#if UNITY_EDITOR
         if(!moving && Input.GetMouseButtonDown(0) && Input.mousePosition.x < Screen.width / 3 && Input.mousePosition.y < Screen.height / 3)
         {
             moving = true;
@@ -45,6 +46,7 @@ public class InputManager : MonoBehaviour
             currentPos = Input.mousePosition;
         if (Input.GetKeyDown(KeyCode.Space))
             ActionClicked();
+#endif
 
         foreach (Touch touch in Input.touches)
         {
